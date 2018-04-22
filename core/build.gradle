@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation project(':annotations')
+    compile 'com.joanzapata.iconify:android-iconify:2.2.2'
+
+    // swipeback基于fragmentation, 具有滑动边缘退出Fragment/Activity功能
+    compile 'me.yokeyword:fragmentation:1.3.3'
+    compile 'me.yokeyword:fragmentation-swipeback:1.3.3'
+
+    //butterknife,最新版本不适配androidstudio3.0
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //iconify图标
+    compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+
+    //网络部分
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    compile 'com.squareup.okio:okio:1.14.0'
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.4.0'
+
+    compile 'com.wang.avi:library:2.1.3'
+
+}
