@@ -9,7 +9,9 @@ import com.joanzapata.iconify.IconFontDescriptor;
  * email : alterjx@163.com
  * describe : TODO
  */
-public class FontEcModule implements IconFontDescriptor {
+public class FontEcModule
+        implements IconFontDescriptor
+{
     @Override
     public String ttfFileName() {
         return "iconfont.ttf";

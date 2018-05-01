@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class Loader {
 
-    private static final int LOADER_SIZE_SCALE = 8;
+    private static final int LOADER_SIZE_SCALE   = 8;
     private static final int LOADER_OFFSET_SCALE = 10;
 
     private static final ArrayList<AppCompatDialog> LOADERS = new ArrayList<>();
@@ -39,7 +39,7 @@ public class Loader {
         final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.create(type, context);
         dialog.setContentView(avLoadingIndicatorView);
 
-        int deviceWidth = DimenUtil.getScreenWidth();
+        int deviceWidth  = DimenUtil.getScreenWidth();
         int deviceHeight = DimenUtil.getScreenHeight();
 
         final Window dialogWindow = dialog.getWindow();

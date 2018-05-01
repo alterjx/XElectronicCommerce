@@ -1,4 +1,3 @@
 package com.example.xjj.compiler;
 
-public class myClass {
-}
+public class myClass {}

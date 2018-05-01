@@ -23,8 +23,8 @@ import okhttp3.RequestBody;
  */
 public class RestClientBuilder {
 
-    private String mUrl;
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
+    private String mUrl;
     private IRequest    mRequest;
     private ISuccess    mSuccess;
     private IFailure    mFailure;
@@ -100,15 +100,6 @@ public class RestClientBuilder {
     }
 
     public RestClient build() {
-        return new RestClient(mUrl,
-                              PARAMS,
-                              mRequest,
-                              mSuccess,
-                              mFailure,
-                              mError,
-                              mRequestBody,
-                              mFile,
-                              mLoaderStyle,
-                              mContext);
+        return new RestClient(mUrl, PARAMS, mRequest, mSuccess, mFailure, mError, mRequestBody, mFile, mLoaderStyle, mContext);
     }
 }

@@ -14,8 +14,8 @@ import java.util.HashMap;
  */
 public class Configurator {
 
-    private static final  HashMap<String, Object> CONFIGS = new HashMap<>();
-    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final HashMap<String, Object>       CONFIGS = new HashMap<>();
+    private static final ArrayList<IconFontDescriptor> ICONS   = new ArrayList<>();
 
 
     private Configurator() {
@@ -56,20 +56,19 @@ public class Configurator {
 
     private void checkConfiguration() {
         boolean isReady = (boolean) CONFIGS.get(ConfigType.CONFIG_READY.name());
-        if (!isReady){
+        if (!isReady) {
             throw new RuntimeException("Configuration not completed");
         }
     }
 
     @SuppressWarnings("unchecked")
-    public<T> T getConfiguration(Enum<ConfigType> key) {
+    public <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
         return (T) CONFIGS.get(key.name());
     }
 
 
-
-    private static class ConfiguratorHolder{
+    private static class ConfiguratorHolder {
         public static final Configurator INSTANCE = new Configurator();
     }
 

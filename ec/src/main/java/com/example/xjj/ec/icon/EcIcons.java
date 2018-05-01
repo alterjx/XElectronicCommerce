@@ -8,7 +8,9 @@ import com.joanzapata.iconify.Icon;
  * email : alterjx@163.com
  * describe : TODO
  */
-public enum EcIcons implements Icon {
+public enum EcIcons
+        implements Icon
+{
     //青蛙图标
     icon_frog('\ue782');
 
@@ -16,6 +18,12 @@ public enum EcIcons implements Icon {
 
     EcIcons(char character) {
         mChar = character;
+    }
+
+    //TODO
+    public static char changeUnicode(String string) {
+        //&#xe782;     icon_frog('\ue782');
+        return ' ';
     }
 
     @Override
@@ -26,11 +34,5 @@ public enum EcIcons implements Icon {
     @Override
     public char character() {
         return mChar;
-    }
-
-    //TODO
-    public static char changeUnicode(String string) {
-        //&#xe782;     icon_frog('\ue782');
-        return ' ';
     }
 }

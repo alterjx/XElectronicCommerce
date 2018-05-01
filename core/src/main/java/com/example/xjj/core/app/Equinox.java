@@ -18,7 +18,8 @@ public final class Equinox {
     }
 
     public static HashMap<String, Object> getConfigurations() {
-        return Configurator.getInstance().getConfigurations();
+        return Configurator.getInstance()
+                           .getConfigurations();
     }
 
     public static Context getApplication() {

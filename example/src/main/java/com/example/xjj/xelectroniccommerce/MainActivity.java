@@ -5,7 +5,14 @@ import android.os.Bundle;
 import com.example.xjj.core.activities.ProxyActivity;
 import com.example.xjj.core.delegates.EquinoxDelegate;
 
-public class MainActivity extends ProxyActivity {
+public class MainActivity
+        extends ProxyActivity
+{
+
+    // Used to load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("native-lib");
+    }
 
     @Override
     public EquinoxDelegate setRootDelegate() {
@@ -18,12 +25,6 @@ public class MainActivity extends ProxyActivity {
         //setContentView(R.layout.activity_main);
 
 
-    }
-
-
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
     }
 
     // Example of a call to a native method

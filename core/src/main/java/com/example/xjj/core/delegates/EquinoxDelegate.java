@@ -6,5 +6,6 @@ package com.example.xjj.core.delegates;
  * email : alterjx@163.com
  * describe : TODO
  */
-public abstract class EquinoxDelegate extends PermissionCheckerDelegate {
-}
+public abstract class EquinoxDelegate
+        extends PermissionCheckerDelegate
+{}

@@ -12,15 +12,17 @@ import com.joanzapata.iconify.fonts.FontAwesomeModule;
  * email : alterjx@163.com
  * describe : TODO
  */
-public class MyApplication extends Application {
+public class MyApplication
+        extends Application
+{
 
     @Override
     public void onCreate() {
         super.onCreate();
         Equinox.init(this)
-                .withApiHost("http://114.67.235.114/RestServer/api/")
-                .withIcon(new FontAwesomeModule())
-                .withIcon(new FontEcModule())
-                .configure();
+               .withApiHost("http://114.67.235.114/RestServer/api/")
+               .withIcon(new FontAwesomeModule())
+               .withIcon(new FontEcModule())
+               .configure();
     }
 }

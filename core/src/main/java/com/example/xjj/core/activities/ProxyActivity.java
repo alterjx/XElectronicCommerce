@@ -15,7 +15,9 @@ import me.yokeyword.fragmentation.SupportActivity;
  * email : alterjx@163.com
  * describe : TODO
  */
-public abstract class ProxyActivity extends SupportActivity{
+public abstract class ProxyActivity
+        extends SupportActivity
+{
 
     public abstract EquinoxDelegate setRootDelegate();
 
@@ -25,12 +27,12 @@ public abstract class ProxyActivity extends SupportActivity{
         initContainer(savedInstanceState);
     }
 
-    private void initContainer(@Nullable Bundle savedInstanceState){
+    private void initContainer(@Nullable Bundle savedInstanceState) {
         ContentFrameLayout contentFrameLayout = new ContentFrameLayout(this);
         contentFrameLayout.setId(R.id.delegate_container);
         setContentView(contentFrameLayout);
         if (savedInstanceState == null) {
-            loadRootFragment(R.id.delegate_container,setRootDelegate());
+            loadRootFragment(R.id.delegate_container, setRootDelegate());
         }
     }
 

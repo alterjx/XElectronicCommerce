@@ -34,10 +34,11 @@ public final class LoaderCreator {
         }
         final StringBuilder drawableClassName = new StringBuilder();
         if (!name.contains(".")) {
-            final String defaultPackageName = AVLoadingIndicatorView.class.getPackage().getName();
+            final String defaultPackageName = AVLoadingIndicatorView.class.getPackage()
+                                                                          .getName();
             drawableClassName.append(defaultPackageName)
-                    .append(".indicators")
-                    .append(".");
+                             .append(".indicators")
+                             .append(".");
         }
         drawableClassName.append(name);
         try {

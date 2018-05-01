@@ -8,6 +8,9 @@ package com.example.xjj.core.app;
  */
 public enum ConfigType {
 
-    CONFIG_READY, ICON, API_HOST, APPLICATION_CONTEXT
+    CONFIG_READY,
+    ICON,
+    API_HOST,
+    APPLICATION_CONTEXT
 
 }

@@ -16,7 +16,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * email : alterjx@163.com
  * describe : TODO
  */
-public abstract class BaseDelegate extends SwipeBackFragment {
+public abstract class BaseDelegate
+        extends SwipeBackFragment
+{
 
     @SuppressWarnings("SpellCheckingInspection")
     Unbinder mUnbinder = null;
