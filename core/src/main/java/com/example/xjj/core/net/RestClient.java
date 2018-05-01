@@ -10,9 +10,12 @@ import com.example.xjj.core.net.callback.RequestCallback;
 import com.example.xjj.core.ui.Loader;
 import com.example.xjj.core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,13 +30,14 @@ public class RestClient {
 
     private final String URL;
     private final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
-    private final IRequest REQUEST;
-    private final ISuccess SUCCESS;
-    private final IFailure FAILURE;
-    private final IError ERROR;
+    private final IRequest    REQUEST;
+    private final ISuccess    SUCCESS;
+    private final IFailure    FAILURE;
+    private final IError      ERROR;
     private final RequestBody REQUESTBODY;
     private final LoaderStyle LOADER_STYLE;
-    private final Context CONTEXT;
+    private final File        FILE;
+    private final Context     CONTEXT;
 
 
     public RestClient(String url,
@@ -43,8 +47,10 @@ public class RestClient {
                       IFailure failure,
                       IError error,
                       RequestBody requestBody,
+                      File file,
                       LoaderStyle loaderStyle,
-                      Context context) {
+                      Context context)
+    {
         this.URL = url;
         this.PARAMS.putAll(params);
         this.REQUEST = request;
@@ -53,6 +59,7 @@ public class RestClient {
         this.ERROR = error;
         this.REQUESTBODY = requestBody;
         this.LOADER_STYLE = loaderStyle;
+        this.FILE = file;
         this.CONTEXT = context;
 
     }
@@ -63,7 +70,7 @@ public class RestClient {
 
     private void request(HttpMethod method) {
         final RestService service = RestCreator.getRestService();
-        Call<String> call = null;
+        Call<String>      call    = null;
         if (REQUEST != null) {
             REQUEST.onRequestStart();
         }
@@ -73,19 +80,27 @@ public class RestClient {
         switch (method) {
             case GET:
                 call = service.get(URL, PARAMS);
-
                 break;
             case POST:
-                call = service.post(URL, PARAMS);
-
+                service.post(URL, PARAMS);
+                break;
+            case POST_RAW:
+                call = service.postRaw(URL, REQUESTBODY);
                 break;
             case PUT:
                 call = service.put(URL, PARAMS);
-
+                break;
+            case PUT_RAW:
+                call = service.putRaw(URL, REQUESTBODY);
                 break;
             case DELETE:
                 call = service.delete(URL, PARAMS);
-
+                break;
+            case UPLOAD:
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
+                call = RestCreator.getRestService()
+                                  .upload(URL, body);
                 break;
             default:
                 break;
@@ -104,11 +119,25 @@ public class RestClient {
     }
 
     public final void post() {
-        request(HttpMethod.POST);
+        if (REQUESTBODY == null) {
+            request(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("if request body is not null,the params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
 
     public final void put() {
-        request(HttpMethod.PUT);
+        if (REQUESTBODY == null) {
+            request(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("if request body is not null,the params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
 
     public final void delete() {

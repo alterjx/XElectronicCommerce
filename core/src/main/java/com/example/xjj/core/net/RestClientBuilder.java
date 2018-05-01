@@ -8,6 +8,7 @@ import com.example.xjj.core.net.callback.IRequest;
 import com.example.xjj.core.net.callback.ISuccess;
 import com.example.xjj.core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -24,13 +25,14 @@ public class RestClientBuilder {
 
     private String mUrl;
     private static final Map<String, Object> PARAMS = RestCreator.getParams();
-    private IRequest mRequest;
-    private ISuccess mSuccess;
-    private IFailure mFailure;
-    private IError mError;
+    private IRequest    mRequest;
+    private ISuccess    mSuccess;
+    private IFailure    mFailure;
+    private IError      mError;
     private RequestBody mRequestBody;
-    private  LoaderStyle mLoaderStyle;
-    private  Context mContext;
+    private File        mFile;
+    private LoaderStyle mLoaderStyle;
+    private Context     mContext;
 
     RestClientBuilder() {
     }
@@ -47,6 +49,16 @@ public class RestClientBuilder {
 
     public RestClientBuilder params(String key, Object value) {
         PARAMS.put(key, value);
+        return this;
+    }
+
+    public RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public RestClientBuilder file(String filePath) {
+        this.mFile = new File(filePath);
         return this;
     }
 
@@ -75,7 +87,7 @@ public class RestClientBuilder {
         return this;
     }
 
-    public RestClientBuilder loader(Context context,LoaderStyle loaderStyle) {
+    public RestClientBuilder loader(Context context, LoaderStyle loaderStyle) {
         mContext = context;
         mLoaderStyle = loaderStyle;
         return this;
@@ -88,6 +100,15 @@ public class RestClientBuilder {
     }
 
     public RestClient build() {
-        return new RestClient(mUrl, PARAMS, mRequest, mSuccess, mFailure, mError, mRequestBody,mLoaderStyle,mContext);
+        return new RestClient(mUrl,
+                              PARAMS,
+                              mRequest,
+                              mSuccess,
+                              mFailure,
+                              mError,
+                              mRequestBody,
+                              mFile,
+                              mLoaderStyle,
+                              mContext);
     }
 }
